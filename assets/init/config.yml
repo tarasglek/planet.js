@@ -1,7 +1,7 @@
 # planet.js configuration
 
 planet:
-  name: Planet Example # Site title
+  name: Send To Kindle # Site title
   tagline: Here's your tagline under title # Site tagline
   description: Yet another planet site # Site description
   link: https://planet.example.com # Site link, do NOT include tailing slash '/'

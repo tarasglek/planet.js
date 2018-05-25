@@ -1,17 +1,12 @@
-planet.js
+planet.kindle
 =========
 
-Don't ask me why invent another wheel. :-(
+Kindle-friendly news aggregator. Fork of https://github.com/phoenixlzx/planet.js
 
 ### Requirements
 
 * Node.js >= v4.0.0
 
-### Installation
-
-```
-sudo npm install -g planet.js
-```
 
 ### Usage
 

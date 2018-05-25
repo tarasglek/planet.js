@@ -34,7 +34,6 @@
     <div class="content pure-u-1 pure-u-md-3-4 pure-u-xl-4-5">
         <div>
             <div class="posts">
-                <h1 class="content-subhead">Recent Posts</h1>
                 <%
                     var cstyles = 'abcd';
                     var limit = posts.length > config['planet'].items ? config['planet'].items : posts.length
@@ -42,29 +41,7 @@
                       var p = posts[i];
                 %>
                 <section class="post">
-                    <p class="post-meta">
-                        <span class="post-author"><%= p.date %></span>
-                        <% if (p.update && p.update !== p.date) { %>
-                        <span class="post-author">// Update <%= p.update %></span>
-                        <% } %>
-                    </p>
-                    <header class="post-header">
-                        <% if (p.avatar) { %>
-                        <img width="48" height="48" alt="<%= p.author %>&#x27;s avatar" class="post-avatar" src="<%= p.avatar %>">
-                        <% } else { %>
-                        <img width="48" height="48" alt="<%= p.author %>&#x27;s avatar" class="post-avatar" src="img/akarin.jpg">
-                        <% } %>
-                        <h2 class="post-title"><a href="<%= p.link %>" class="post-title"><%= p.title %></a></h2>
-                        <p class="post-meta">
-                            <span class="post-author"><%= p.author %></span>
-                            <%
-                                p.categories.forEach(function(category) {
-                                var c = cstyles.charAt(Math.floor(Math.random() * cstyles.length));
-                            %>
-                            <span class="post-category post-category-<%= c %>" href="#"><%= category %></span>
-                            <% }) %>
-                        </p>
-                    </header>
+                        <b class="post-title"><a href="<%= p.link %>" class="post-title"><%= p.title %></a></b>
                     <div class="post-description">
                         <% if (p._length > config['planet'].display_length && p.summary) { %>
                           <% if(config['planet'].lazyload) { %>
@@ -77,10 +54,21 @@
                             <input type="hidden" name="email" value="taras.glek.refurb"/>
                             <input type="hidden" name="domain" value="2"/>
                             <input type="hidden" name="save" value="yes"/>
-                            <div><p class="post-meta">[<em><a href="<%= p.link %>">Continue reading...</a></em>]
+                            <div><p class="post-meta">
                                 [<input type="submit" value="kindle"/>]
+                                [<em><a href="<%= p.link %>"><%= p.channel %></a></em>]
+                            <span class="post-author"><%= p.author %></span>
+                            <span class="post-meta">
+                                <%
+                                    p.categories.forEach(function(category) {
+                                    var c = cstyles.charAt(Math.floor(Math.random() * cstyles.length));
+                                %>
+                                <%= category %>
+                                <% }) %>
+                            </span>
                             </p></div>
                         </form>
+                        <br/>
                         <% } else { %>
                           <% if(config['planet'].lazyload) { %>
                             <%- p.content.replace(new RegExp('src=','g'),'data-original=') %>
@@ -111,5 +99,14 @@
         <% if(config['planet'].lazyload) { %>var myLazyLoad = new LazyLoad();<% } %>
     </script>
 </div>
+<script>
+    function scrollMeDirection(direction) {
+        var e = document.getElementById("marker")
+        var pos = e.style.top.replace("px", "") * 1
+        console.log(pos)
+        console.log(e.style.top=Math.max(0, pos + direction * 500) + 'px');
+        window.location="#marker"
+    }
+</script>
 </body>
 </html>
