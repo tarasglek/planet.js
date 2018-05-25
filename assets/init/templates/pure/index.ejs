@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="layout" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4 pure-u-xl-1-5">
+    <!-- <div class="sidebar pure-u-1 pure-u-md-1-4 pure-u-xl-1-5">
         <div class="header">
             <h1 class="brand-title"><%= config['planet'].name %></h1>
             <h2 class="brand-tagline"><%= config['planet'].tagline %></h2>
@@ -30,7 +30,7 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
     <div class="content pure-u-1 pure-u-md-3-4 pure-u-xl-4-5">
         <div>
             <div class="posts">
@@ -72,7 +72,15 @@
                           <% } else { %>
                             <%- p.summary %>
                           <% } %>
-                        <div><p class="post-meta">[<em><a href="<%= p.link %>">Continue reading...</a></em>]</p></div>
+                          <!-- curl 'http://fivefilters.org/kindle-it/send.php?context=send&url=http%3A%2F%2Fpodcatch.com%2F' -H 'Cookie: gsScrollPos-1359=0; gsScrollPos-1764=0; gsScrollPos-1768=0' -H 'Origin: http://fivefilters.org' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,uk-UA;q=0.8,uk;q=0.7' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: */*' -H 'Referer: http://fivefilters.org/kindle-it/send.php?url=http%3A%2F%2Fpodcatch.com%2F' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' --data 'email=&from=&title=&email=taras.glek.refurb&domain=2&save=yes' --compressed -->
+                        <form action="http://fivefilters.org/kindle-it/send.php?context=send&url=<%= encodeURIComponent(p.link) %>" method="POST">
+                            <input type="hidden" name="email" value="taras.glek.refurb"/>
+                            <input type="hidden" name="domain" value="2"/>
+                            <input type="hidden" name="save" value="yes"/>
+                            <div><p class="post-meta">[<em><a href="<%= p.link %>">Continue reading...</a></em>]
+                                [<input type="submit" value="kindle"/>]
+                            </p></div>
+                        </form>
                         <% } else { %>
                           <% if(config['planet'].lazyload) { %>
                             <%- p.content.replace(new RegExp('src=','g'),'data-original=') %>
