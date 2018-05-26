@@ -95,3 +95,5 @@ people:
   avatar: #images/akarin.jpg # available types: file path, gravatar email, http(s) image uri, or just leave blank
 - name: New Statesman
   link: https://www.newstatesman.com/feeds/site_feed.rss
+- name: FT China
+  link: https://www.ft.com/world/asia-pacific/china?format=rss
