@@ -50,7 +50,7 @@
                             <%- p.summary %>
                           <% } %>
                           <!-- curl 'http://fivefilters.org/kindle-it/send.php?context=send&url=http%3A%2F%2Fpodcatch.com%2F' -H 'Cookie: gsScrollPos-1359=0; gsScrollPos-1764=0; gsScrollPos-1768=0' -H 'Origin: http://fivefilters.org' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,uk-UA;q=0.8,uk;q=0.7' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: */*' -H 'Referer: http://fivefilters.org/kindle-it/send.php?url=http%3A%2F%2Fpodcatch.com%2F' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' --data 'email=&from=&title=&email=taras.glek.refurb&domain=2&save=yes' --compressed -->
-                        <form action="http://fivefilters.org/kindle-it/send.php?context=send&url=<%= encodeURIComponent(p.link) %>" method="POST">
+                        <form action="http://fivefilters.org/kindle-it/send.php?context=send&url=<%= encodeURIComponent(p.link) %>" method="POST" target=kindle-frame>
                             <input type="hidden" name="email" value="taras.glek.refurb"/>
                             <input type="hidden" name="domain" value="2"/>
                             <input type="hidden" name="save" value="yes"/>
@@ -100,13 +100,27 @@
     </script>
 </div>
 <script>
-    function scrollMeDirection(direction) {
-        var e = document.getElementById("marker")
-        var pos = e.style.top.replace("px", "") * 1
-        console.log(pos)
-        console.log(e.style.top=Math.max(0, pos + direction * 500) + 'px');
-        window.location="#marker"
+    function scrollDown(vroom) {
+        var ls = document.getElementsByClassName("post")
+        for (var i = 0;i<ls.length && vroom > 0;i++) {
+            var s = ls[i].style;
+            if (s.display == 'none') continue;
+            vroom-=ls[i].clientHeight;
+            s.display='none'
+        }
+    }
+    function scrollUp(vroom) {
+        var ls = document.getElementsByClassName("post")
+        for (var i = ls.length - 1;i >=0 && vroom > 0;i--) {
+            var s = ls[i].style;
+            if (s.display == 'none') {
+                vroom-=ls[i].clientHeight;
+                s.display='unset'
+            }
+        }
     }
 </script>
+<div id="nav"><button onclick="scrollUp(this.getBoundingClientRect().bottom)">UP</button><br><button onclick="scrollDown(this.getBoundingClientRect().top)">DOWN</button></div>
+<iframe name="kindle-frame"></iframe>
 </body>
 </html>

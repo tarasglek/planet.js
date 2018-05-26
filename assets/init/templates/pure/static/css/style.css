@@ -6,6 +6,10 @@
 
 body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Lato", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Hiragino Kaku Gothic Pro", Meiryo, "Malgun Gothic", "Helvetica Neue", sans-serif;
+    margin-left: 1em;
+    margin-right: 1em;
+    height: 100%;
+    overflow: hidden;
 }
 
 pre,
@@ -210,4 +214,20 @@ div.post-description p, li {
     .pure-u-xl-4-5 {
         width: 75%;
     }
+}
+
+button {
+    min-height: 1cm;
+    min-width: 2cm
+}
+
+#nav {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+#nav button {
+    min-width: 1cm;
+    min-height: 1cm;
+    width: 100%;
 }
