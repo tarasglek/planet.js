@@ -97,3 +97,5 @@ people:
   link: https://www.newstatesman.com/feeds/site_feed.rss
 - name: FT China
   link: https://www.ft.com/world/asia-pacific/china?format=rss
+- name: London Review Of Books
+  link: https://cdn.lrb.co.uk/feeds/lrb

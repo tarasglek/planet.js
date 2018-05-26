@@ -1,8 +1,12 @@
+# docker build . -t kindle-planet
 FROM node:9
-RUN mkdir -p /app && chown node -R /app
-COPY * /app/
 RUN yarn global add http-server
-WORKDIR /app
+RUN mkdir /deps && chown node /deps
+WORKDIR /deps
 USER node
+COPY app/package.json /deps
 RUN yarn install
-
+COPY --chown=node app /app/
+RUN ln -svf /deps/* /app
+WORKDIR /app
+CMD ./run.sh
